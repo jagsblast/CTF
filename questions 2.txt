@@ -1,0 +1,58 @@
+1. Detection and Execution
+What PowerShell commands have been executed on the endpoints recently?
+
+Investigate the history of PowerShell command execution to identify if the script was run.
+Are there any alerts related to the execution of binaries or scripts from unusual locations?
+
+Look for alerts that indicate execution of files from non-standard or suspicious directories.
+Have any custom or unknown executable files been detected?
+
+Check for detections related to executables that are not commonly seen in the environment.
+2. Network Activity
+What outbound network connections have been made from endpoints in the last 24 hours?
+
+Examine recent network activity to identify any unusual connections, especially to localhost or specific ports.
+Has there been any network activity involving Netcat or similar tools?
+
+Search for network activity related to tools commonly used for network connections and port listening.
+3. File System and Path Monitoring
+Have there been any modifications or creations of files in the C:\Windows\Temp directory?
+
+Investigate recent changes to files in this directory.
+Are there any alerts or logs indicating changes to or creation of directories under C:\Tools?
+
+Check for any activities in directories where binaries were supposed to be cloned.
+4. Exclusions and Defenses
+Have there been any modifications to antivirus or endpoint protection settings recently?
+
+Look for changes in exclusion rules or modifications to endpoint protection configurations.
+What attempts to bypass security controls have been detected on the endpoints?
+
+Review any detected attempts to disable or bypass security measures.
+5. Privilege Escalation and Command Execution
+Have there been any detected privilege escalation attempts on the endpoints?
+
+Search for logs or alerts indicating activities related to privilege escalation tools.
+What unusual command executions have been observed in recent activity?
+
+Investigate any commands that deviate from normal usage patterns.
+6. Repository Cloning and Software Installation
+What recent software installations or updates have been detected?
+
+Look for alerts or logs related to recent software installations or updates from external sources.
+Have there been any downloads or cloning activities from GitHub or other repositories?
+
+Examine network traffic or file system changes related to GitHub or other repositories.
+7. Execution Timing and Random Delays
+Are there any patterns of execution delays or scheduling in recent endpoint activity?
+Check if there are any patterns in execution timing or random delays that could indicate automated or scripted behavior.
+8. Incident and Response Management
+What incidents have been triggered recently, and what are their details?
+
+Review recent incident reports to understand what activities have been flagged.
+What actions have been taken in response to recent alerts or incidents?
+
+Check the response history to understand the actions taken by security teams.
+9. Overall Threat Context
+What known threat indicators or TTPs (Tactics, Techniques, and Procedures) align with recent activity?
+Compare recent activity with known threat patterns to identify potential matches.
