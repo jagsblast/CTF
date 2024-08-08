@@ -1,0 +1,45 @@
+Advanced Detection and Response
+Have any of the detected PowerShell scripts used encoded commands or obfuscation techniques recently?
+
+Were there any anomalies detected in process creation or command-line arguments that might indicate a script execution?
+
+Network and Host Activity Analysis
+What unusual patterns or anomalies can be observed in network traffic involving internal or local IP addresses?
+
+Identify any endpoint communications that involve IP addresses or ports frequently used by known adversary tools or techniques.
+
+File Integrity and Modification
+Have there been any unauthorized modifications or executions of files in sensitive directories (e.g., C:\Windows\System32) detected?
+
+What files in the C:\Windows\Temp directory were accessed or modified at irregular times or intervals?
+
+Security Control Bypass Techniques
+What specific attempts have been made to modify or disable endpoint protection mechanisms, and what were their outcomes?
+
+Analyze any detected exclusion or bypass activities to identify if they correlate with known evasion techniques.
+
+Privilege Escalation and Lateral Movement
+What indicators suggest the use of privilege escalation tools or techniques, and how were they executed?
+
+Have there been any detected movements between high-privilege accounts or systems that could indicate lateral movement?
+
+Unusual Software and Repository Activities
+Have there been any instances of software being executed from paths or repositories not traditionally used within the organization?
+
+Analyze any network activity related to GitHub or other version control systems for potential exfiltration or command-and-control operations.
+
+Command Execution Patterns
+Identify any anomalous patterns in the execution of commands that involve nc.exe or similar network utilities.
+
+What command-line arguments used in recent executions are indicative of scripted or automated activities?
+
+Incident Correlation and Context
+Correlate any detected activities with known threat actor TTPs to identify potential attack patterns or techniques used.
+
+Review historical incidents to determine if recent activities align with patterns observed in previous security breaches.
+
+Endpoint Behavior Analysis
+Examine the behavior of endpoints to identify any anomalous execution sequences or unauthorized tool usage.
+
+What indicators suggest the presence of automated scripts or tools running with elevated privileges on the endpoints?
+
